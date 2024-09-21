@@ -33,7 +33,7 @@ def index(request):
             content = query.cleaned_data.get('query')
             send_subject = f"{subject} from {name}"
             send_message = f"Recived From:\nEmail: {email}\nName: {name}\nMessage:\n{content}"
-            result = sending_mails.delay(send_subject,send_message,'newsreader018@gmail.com',['newsreader018@gmail.com'])
+            result = sending_mails(send_subject,send_message,'newsreader018@gmail.com',['newsreader018@gmail.com'])
             if result:
                 messages.success(request,"Query Sent Successfully!!!")
             else:
