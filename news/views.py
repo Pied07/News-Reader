@@ -194,7 +194,7 @@ def activate(request, uidb64,token):
         sending_mails(subject,message,'',[email]) 
     else:
         user.delete()
-        messages.error(request,"Activation Link is Invalid")
+        messages.error(request,user,default_token_generator.check_token(user, token))
     return redirect('home')
 
 def activateEmail(request,user,to_email):
