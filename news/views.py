@@ -193,6 +193,7 @@ def activate(request, uidb64,token):
         print(subject,email)
         sending_mails(subject,message,'',[email]) 
     else:
+        user.delete()
         messages.error(request,"Activation Link is Invalid")
     return redirect('home')
 
