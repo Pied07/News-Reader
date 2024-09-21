@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Subscribe{% endblock %}
+
+{% block content %}
+            <div id="home" class="container" style="margin-top: 40px;">
+                <center><h1><span style="color: purple;">Premium Page</span></h1></center><hr>
+                {% for message in messages %}
+                  <div class="alert alert-danger">
+                    {{message}}
+                  </div>
+                {% endfor %}
+                <div class="row" style="margin: auto; justify-content: center; width: 68rem; margin-top: 50px;">
+                    <div class="col-md-3 mx-4 d-flex mb-3">
+                        <div class="card shadow" style="width: 20rem; height: auto; justify-content: center;">
+                            <div class="card-body d-flex flex-column" style="flex:1;">
+                              <h5 class="card-title"><span style="color: blue;">Monthly Premiumship</span></h5>
+                              <p class="card-text"> Get the benifit of reading more news. <br>  With just Rs 1 activate your Premium membership for a month <br>  Get more varieties <br> Press the button Below to get a monthly Premiumship Pay for the Monthly <b>Premiumship Now with just Rs 1.</b></p>
+                              <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="mt-auto d-flex flex-column"><hr>
+                                  <input type="hidden" name="subscription_type" value="monthly">
+                                    <button class="btn btn-primary">Pay Monthly</button>
+                                  </div>
+                              </form>
+                            </div>
+                          </div>
+                    </div>
+
+                    <div class="col-md-3 mx-4 d-flex mb-3">
+                      <div class="card shadow" style="width: 20rem; height: auto;">
+                          <div class="card-body d-flex flex-column" style="flex:1;">
+                            <h5 class="card-title"><span style="color:blue;">Yearly Premiumship</span></h5>
+                            <p class="card-text">Don't wanna pay every month?<br> No Worries We got you Get all the benifits of monthly premiumship paying only once a year <br> <b>With only Rs 2 you can get a Premiumship</b> for as long as a year. <br> Have Fun! <br><br></p>
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="mt-auto d-flex flex-column"><hr>
+                                  <input type="hidden" name="subscription_type" value="yearly">
+                                    <button class="btn btn-primary">Pay Yearly</button>
+                                  </div>
+                            </form>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+            </div>
+    </div>
+
+{% endblock %}

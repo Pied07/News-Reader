@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <center>
+            <h1 style="color:purple;">Register</h1><hr>
+        </center>
+        <div class="credential mt-5 text-center" style="display: flex; justify-content: center;">
+            <form method="post">
+                {% csrf_token %}
+                {% for message in messages %}
+  
+                <div class="alert alert-danger">
+                {{message}}
+                </div>
+            
+            {% endfor %}
+                    {% if form.username.errors %}
+                    {% for error in form.username.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{error}}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{error}}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% if form.password1.errors %}
+                    {% for error in form.password1.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{error}}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% if form.password2.errors %}
+                    {% for error in form.password2.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{error}}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    
+                <div class="box shadow-lg" style="background-color: #a2e0f0; width: 30rem; border-radius: 15px">
+                    <div class="mb-3 pt-3 px-3">
+                        {{form.username}}
+                    </div>
+                    <div class="mb-3 px-3">
+                        {{form.email}}
+                    </div>
+                    <div class="mb-3 px-3">
+                        {{form.password1}}
+                    </div>
+                    <div class="mb-3 px-3">
+                        {{form.password2}}
+                    </div>
+                    <p>Already a User? <a href="{% url "login" %}">Click here</a> to Login</p>
+                    <div class="mb-3 px-3">
+                        {{form.captcha}}
+                      </div>
+                    <button class="btn btn-success mb-3">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}News{% endblock %}
+
+{% block dropdown %}
+
+<form method="POST">
+    {% csrf_token %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Filters
+        </a>
+        <ul class="dropdown-menu">
+            <input type="hidden" name="countries"> {{form.as_p}}
+            <input type="hidden" name="sort">{{sort_form.as_p}}
+            <input type="hidden" name="language"> {{language_form.as_p}}
+            <div class="input-group-append"><button class="btn btn-outline-success">Search</button></div>
+        </ul>
+      </li>
+</form>
+
+{% endblock %}
+
+
+{% block search %}
+
+<form class="d-flex" role="search" method="GET">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search" name="keyword" placeholder="Search world for Categories" aria-label="Search">
+    <button class="btn btn-success me-2" type="submit">Search</button>
+    <button class="btn btn-outline-success me-2" type="submit" value="general" name="category">General</button>
+    <button class="btn btn-outline-success me-2" type="submit" value="health" name="category">Health</button>
+    <button class="btn btn-outline-success me-2" type="submit" value="business" name="category">Business</button>
+    <button class="btn btn-outline-success me-2" type="submit" value="science" name="category">Science</button>
+    <button class="btn btn-outline-success me-2" type="submit" value="science" name="sports">Sports</button>
+    <button class="btn btn-outline-success me-2" type="submit" value="entertainment" name="category">Entertainment</button>
+</form>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="head">
+        <center><h1><b>Total Number of data:</b> {{total_response}}</h1></center>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            {% for article in articles %}
+                    
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100 shadow">
+                                <img src="{{article.image}}" class="card-img-top" alt="..." style="height:16rem">
+                                <div class="card-body d-flex flex-column">
+                                <h5 class="card-title" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp:3; overflow: hidden; text-overflow: ellipsis;">{{article.title}}</h5>
+                                <h7 class="card-title"><b>Author: </b>{{article.author}}</h7><br>
+                                <p class="card-title">{{article.source.name}}</p>
+                                <p class="card-text" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp:3; overflow: hidden; text-overflow: ellipsis;">{{article.description}}</p><hr class="mt-auto">
+                                <small><b>Published At:</b> {{article.published_at}}</small>
+                                <a href="{{article.url}}" class="btn btn-primary mt-auto" target='_blank'>Read More</a>
+                                </div>
+                            </div>
+                        </div>
+
+            {% endfor %}
+        </div>
+    </div>
+    {% if not user.subscription_model.subscription %}
+        <center>
+            <p>Become a Premium User to get More Content. It Takes only a few minutes, <a href="{% url "premium" %}">Click Here</a> To Become a Premium User</p>
+        </center>
+    {% endif %}
+
+{% endblock %}

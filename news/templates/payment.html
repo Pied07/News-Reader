@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Payment{% endblock %}
+
+{% block content %}
+
+    <div class="container text-center">
+        <center>
+            <h1 style="color:purple;">Payment Page</h1>
+        </center>
+        <center><h1 class="mt-4" style="color:blue;">Pay for {{subscription_type}} Subscription</h1></center><hr>
+        {% if amount == 100 %}
+            <h3>Amount = Rs: 1.00</h3>
+        {% elif amount == 200 %}
+            <h3>Amount = Rs: 2.00</h3>
+        {% endif %}
+        <br>
+        <br>
+        <form action="{% url 'payment_success' subscription_type %}" method="POST" id="razorpay-form">
+            {% csrf_token %}
+            <script src="https://checkout.razorpay.com/v1/checkout.js"
+                data-key="{{ razorpay_key_id }}"
+                data-amount="{{amount}}"
+                data-currency="INR"
+                data-order_id="{{ order_id }}"
+                data-buttontext="Pay Now"
+                data-name="{{subscription_type}} Subscription To News Reader"
+                data-description="Payment for {{subscription_type}} Subscription"
+                data-theme.color="#F37254">
+            </script>
+        </form>
+    </div>
+
+{% endblock %}

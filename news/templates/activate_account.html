@@ -1,0 +1,17 @@
+{% autoescape off %}
+
+Hello {{ user.username }}
+
+We Welcome You with a Warm hug and Thank you so much for Choosing to Join News Reader.
+
+Please Click on the link below to confirm your registration:
+
+http://{{domain}}{% url "activate" uidb64=uid token=token%}
+
+Have fun Reading News and have a good day ahead!!
+
+Thank You
+News Reader Team
+
+
+{% endautoescape %}

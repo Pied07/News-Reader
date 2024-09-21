@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+    <div>
+        <center>
+            <h1 style="color:purple;">Login</h1><hr>
+        </center>
+        
+        <div class="credential mt-5 text-center" style="display: flex;justify-content: center;">
+            <form method="post">
+                {% csrf_token %}
+                {% for message in messages %}
+  
+                <div class="alert alert-danger">
+                {{message}}
+                </div>
+            
+            {% endfor %}
+                        {% if form.username.errors %}
+                        {% for error in form.username.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{error}}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        {% if form.password.errors %}
+                        {% for error in form.password.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{error}}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        
+                        <div class="box shadow-lg" style="background-color: #a2e0f0; border-radius: 15px">
+                            <div class="mb-3 px-3 pt-3">
+                                {{form.username}}
+                            </div>
+                            <div class="mb-3 px-3">
+                                {{form.password}}
+                            </div>
+                            <a href="{% url "password_reset" %}" class="d-flex justify-content-end px-4 mb-3">Forgot Password?</a>
+                            <p class="px-3">Don't have an Account? <a href="{% url "register" %}">Click here</a> to Create a new Account</p>
+                            <div class="mb-3 px-3">
+                                {{form.captcha}}
+                              </div>
+                            <button class="btn btn-success pb-2 mb-4">Submit</button>
+                        </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
