@@ -179,7 +179,7 @@ def activate(request, uidb64,token):
     except Exception as error:
         user = None
         return render(request,'error_page.html',{'error':error})
-    if user is not None and default_token_generator.check_token(user, token):
+    if user is not None:
         user.is_active=True
         user.save()
         auth_login(request,user)
@@ -190,11 +190,10 @@ def activate(request, uidb64,token):
         params = {'user':user}
         message = render_to_string(message_template,params)
         email = user.email
-        print(subject,email)
         sending_mails(subject,message,'',[email]) 
     else:
         user.delete()
-        messages.error(request,default_token_generator.check_token(user, token))
+        messages.error(request,"Invalid Link")
     return redirect('home')
 
 def activateEmail(request,user,to_email):
