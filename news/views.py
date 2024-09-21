@@ -34,7 +34,7 @@ def index(request):
             send_subject = f"{subject} from {name}"
             send_message = f"Recived From:\nEmail: {email}\nName: {name}\nMessage:\n{content}"
             reciver_mails=['newsreader018@gmail.com']
-            result = sending_mails.delay(send_subject,send_message,email,reciver_mails)
+            result = sending_mails.delay(send_subject,send_message,'',reciver_mails)
             if result:
                 messages.success(request,"Query Sent Successfully!!!")
             else:
