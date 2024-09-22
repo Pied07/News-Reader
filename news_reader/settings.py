@@ -29,9 +29,9 @@ SECRET_KEY = config('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['news-reader-1.onrender.com']
+ALLOWED_HOSTS = ['news-reader-7uab.onrender.com']
 
 
 # Application definition
