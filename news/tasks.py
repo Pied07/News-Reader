@@ -3,6 +3,7 @@ from django.core.mail import send_mail
 from django.utils import timezone
 from .models import Subscription_Model
 from django.template.loader import render_to_string
+import requests
 
 @shared_task
 def sending_mails(subject,message,from_mail,recipient_lists):
@@ -24,3 +25,11 @@ def expire_subscriptions():
         subject = f"Dear {user} your subscription validity has been expired"
         message = render_to_string('expired.html',{'user':user,'type':plan})
         sending_mails(subject,message,'',[email])
+
+@shared_task
+def ping_website():
+    try:
+        response = requests.get('https://news-reader-7uab.onrender.com')
+        return response.status_code
+    except requests.exceptions.RequestException as e:
+        return str(e)
