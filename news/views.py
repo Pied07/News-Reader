@@ -163,7 +163,7 @@ def payment_success(request,subscription_type):
     message = render_to_string('premium_thanks.html',{'user':premium.user,'type':subscription_type})
     email = premium.user.email
     sending_mails(subject,message,'',[email])
-    return render(request, 'home.html')
+    return render(request, 'payment_success.html')
 
 @csrf_exempt
 def payment_failure(request):
