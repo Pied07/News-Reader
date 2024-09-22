@@ -179,5 +179,9 @@ CELERY_BEAT_SCHEDULE = {
     'expire-subscriptions-every-day':{
         'task':'news.tasks.expire_subscriptions',
         'schedule': crontab(hour=0,minute=0)
+    },
+    'ping-website':{
+        'task':'news.tasks.ping_website',
+        'schedule':300.0,
     }
 }
