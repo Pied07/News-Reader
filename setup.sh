@@ -4,7 +4,7 @@
 gunicorn news_reader.wsgi:application &
 
 #Start Celery Worker
-celery -A news_reader worker --pool=gevent  --concurrency=3 -l-Info &
+celery -A news_reader worker --pool=gevent --loglevel=info --concurrency=3 &
 
 # Start Celery Beat
 celery -A news_reader beat --loglevel=info &
